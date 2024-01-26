@@ -1,0 +1,24 @@
+title Double Buffer Pattern in Data Caching
+
+participant Client
+participant "Buffer A (Active)" as A
+participant "Buffer B (Idle)" as B
+
+Client->A: Read Request
+A->Client: Return Data
+
+note right of B: Update Data in Buffer B
+
+Client->A: Read Request
+A->Client: Return Data
+
+note over B: Buffer B Update Complete
+
+B->A: Notify Update Complete
+
+note over A, B: Swap Roles of Buffers
+
+Client->B: Read Request
+B->Client: Return Updated Data
+
+note right of A: Update Data in Buffer A

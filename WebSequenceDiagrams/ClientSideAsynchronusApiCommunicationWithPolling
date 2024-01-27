@@ -1,1 +1,32 @@
+title Asynchronous API Communication with Client-Side Polling
 
+participant User as U
+participant ClientApp as CA
+participant AsyncAPI as API
+
+U->CA: Initiate Request (e.g., Click Button)
+CA->API: Send Async Request
+API-->CA: Acknowledge Request (202 Accepted)
+CA->CA: Show Loading Indicator
+
+loop Poll for Completion
+    CA->API: Poll for Request Status
+    API-->CA: Status: Pending
+    note over CA: Wait before next poll
+end
+
+API-->CA: Status: Completed
+CA->API: Fetch Result
+API-->CA: Response Data
+
+CA->CA: Hide Loading Indicator
+CA->CA: Update UI with Data
+CA-->U: Display Updated Data
+
+alt Error Handling
+    CA->API: Poll for Request Status
+    API-->CA: Error Response
+    CA->CA: Hide Loading Indicator
+    CA->CA: Show Error Message
+    CA-->U: Display Error
+end

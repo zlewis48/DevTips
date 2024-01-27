@@ -1,0 +1,24 @@
+title Server Side Synchronous Wrapper over Asynchronous API with Polling
+
+participant Client
+participant SyncAPI
+participant AsyncAPI
+
+Client->SyncAPI: Request (synchronous)
+activate SyncAPI
+SyncAPI->AsyncAPI: Initiate async task
+activate AsyncAPI
+AsyncAPI-->SyncAPI: Acknowledge initiation
+deactivate AsyncAPI
+loop Polling for completion
+    SyncAPI->AsyncAPI: Check status
+    activate AsyncAPI
+    AsyncAPI-->SyncAPI: Status (Pending/Complete)
+    deactivate AsyncAPI
+end
+SyncAPI->AsyncAPI: Retrieve result
+activate AsyncAPI
+AsyncAPI-->SyncAPI: Result data
+deactivate AsyncAPI
+SyncAPI-->Client: Response with data
+deactivate SyncAPI

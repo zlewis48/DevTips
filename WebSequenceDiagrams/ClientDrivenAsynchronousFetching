@@ -1,4 +1,4 @@
-title Asynchronous API Communication with Client-Side Polling
+title Client‐Driven Asynchronous Fetching
 
 participant User as U
 participant ClientApp as CA

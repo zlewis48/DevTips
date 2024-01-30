@@ -1,0 +1,13 @@
+title Asynchronous Processing in Synchronous REST API Call
+
+participant Client
+participant API_Endpoint as API Endpoint
+participant Internal_Service as Internal Service
+participant Event_System as Event System
+
+Client->API_Endpoint: HTTP Request
+API_Endpoint->Internal_Service: Trigger Async Task
+note over Internal_Service: Async Processing
+Internal_Service->Event_System: Task Completed
+Event_System->API_Endpoint: Notify Completion
+API_Endpoint->Client: HTTP Response with Data

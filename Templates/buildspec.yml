@@ -1,0 +1,40 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8  # Specify the runtime version, e.g., Node.js, Java, Python, etc.
+    commands:
+      - echo Installing dependencies...
+      - pip install -r requirements.txt  # Adjust this command to install your project's dependencies
+
+  pre_build:
+    commands:
+      - echo Running pre-build commands...
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling the source code...
+      # Add the commands to build your application here
+      - echo Build completed on `date`
+
+  post_build:
+    commands:
+      - echo Running post-build commands...
+      # You can add commands for cleanup or other post-build operations here
+
+# Artifacts and cache sections are optional
+artifacts:
+  files:
+    - '**/*'  # Specify the files to be included in the build output artifact
+  # You can specify the 'discard-paths' and 'base-directory' options here if needed
+
+cache:
+  paths:
+    - '/root/.cache/pip'  # Cache the pip install directory to speed up future builds
+
+# You can specify environment variables here if needed
+# environment:
+#   variables:
+#     KEY: "value"
